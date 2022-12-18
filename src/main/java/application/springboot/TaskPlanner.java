@@ -16,17 +16,17 @@ import java.util.List;
 
 @Component
 @ComponentScan("application")
-public class ScheduledTask {
+public class TaskPlanner {
     private final PlaneCalculation planeCalculation;
     private final AirplaneCharacteristicsService airplaneCharacteristicsService;
     private final AirplaneService airplaneService;
     private final FlightService flightService;
     private final TemporaryPointService temporaryPointService;
 
-    public ScheduledTask(PlaneCalculation planeCalculation,
-                         AirplaneCharacteristicsService airplaneCharacteristicsService,
-                         AirplaneService airplaneService, FlightService flightService,
-                         TemporaryPointService temporaryPointService) {
+    public TaskPlanner(PlaneCalculation planeCalculation,
+                       AirplaneCharacteristicsService airplaneCharacteristicsService,
+                       AirplaneService airplaneService, FlightService flightService,
+                       TemporaryPointService temporaryPointService) {
         this.planeCalculation = planeCalculation;
         this.airplaneCharacteristicsService = airplaneCharacteristicsService;
         this.airplaneService = airplaneService;
