@@ -9,7 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 public class ApplicationInitializer {
     public static void main(String[] args) {
         System.out.println("start");
-
-        SpringApplication.run(Injecting.class, args);
+        SpringApplication.run(ApplicationRunner.class, args);
     }
 }

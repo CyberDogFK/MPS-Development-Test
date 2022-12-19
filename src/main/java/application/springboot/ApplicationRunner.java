@@ -14,38 +14,38 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan({"application"})
 @EnableJpaRepositories("application.dao")
 @EntityScan("application.model")
-public class Injecting implements CommandLineRunner {
+public class ApplicationRunner implements CommandLineRunner {
     private final PlaneCalculation planeCalculation;
     private final AirplaneServiceImpl airplaneService;
     private final AirplaneCharacteristicsService airplaneCharacteristicsService;
     private final FlightService flightService;
     private final TemporaryPointService temporaryPointService;
     private final WayPointService wayPointService;
-    private final ScheduledTask scheduledTask;
+    private final TaskPlanner taskPlanner;
 
 
-    public Injecting(PlaneCalculation planeCalculation, AirplaneServiceImpl airplaneService,
-                     AirplaneCharacteristicsService airplaneCharacteristicsService,
-                     FlightService flightService, TemporaryPointService temporaryPointService,
-                     WayPointService wayPointService, ScheduledTask scheduledTask) {
+    public ApplicationRunner(PlaneCalculation planeCalculation, AirplaneServiceImpl airplaneService,
+                             AirplaneCharacteristicsService airplaneCharacteristicsService,
+                             FlightService flightService, TemporaryPointService temporaryPointService,
+                             WayPointService wayPointService, TaskPlanner taskPlanner) {
         this.planeCalculation = planeCalculation;
         this.airplaneService = airplaneService;
         this.airplaneCharacteristicsService = airplaneCharacteristicsService;
         this.flightService = flightService;
         this.temporaryPointService = temporaryPointService;
         this.wayPointService = wayPointService;
-        this.scheduledTask = scheduledTask;
+        this.taskPlanner = taskPlanner;
     }
 
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println(flightService.getAll());
-        scheduledTask.doTask1();
+        taskPlanner.doTask1();
         System.out.println(flightService.getAll());
-        scheduledTask.doTask2();
+        taskPlanner.doTask2();
         System.out.println(flightService.getAll());
-        scheduledTask.doTask3();
+        taskPlanner.doTask3();
         System.out.println(flightService.getAll());
     }
 }
