@@ -15,19 +15,15 @@ public class PlaneCalculationImpl implements PlaneCalculation {
         List<TemporaryPoint> temporaryPoints = new ArrayList<>();
         TemporaryPoint currentTemporaryPoint = startTemporaryPointToNorth();
 
-        System.out.println(wayPoints);
         temporaryPoints.add(currentTemporaryPoint);
         long counter = 0;
         for (WayPoint wayPoint : wayPoints) {
-            System.out.println("Way point " + wayPoint);
             while (isNextWayPointPassed(currentTemporaryPoint, wayPoint) && counter < 150) {
                 TemporaryPoint nextTemporaryPoint = calculateNextTemporaryPoint(currentTemporaryPoint,
                         wayPoint, characteristics);
                 temporaryPoints.add(nextTemporaryPoint);
                 currentTemporaryPoint = nextTemporaryPoint;
                 currentTemporaryPoint.setId(counter++);
-                System.out.println("way point" + wayPoint);
-                System.out.println("current waypoint " + currentTemporaryPoint);
                 temporaryPoints.add(currentTemporaryPoint);
             }
         }
@@ -78,8 +74,6 @@ public class PlaneCalculationImpl implements PlaneCalculation {
             if (temporaryPoint.getLongitude() < wayPoint.getLongitude()) {
                 // точка в правому верхньому кутку
                 longitudeDifferance = temporaryPoint.getFlightSpeed() * Math.abs(Math.sin(temporaryPoint.getCourse()));
-                System.out.println("longitude " + Math.sin(temporaryPoint.getFlightSpeed() / temporaryPoint.getCourse()));
-                System.out.println("longitude dif:" + longitudeDifferance);
             }
             if (temporaryPoint.getLongitude() > wayPoint.getLongitude()) {
                 // точка в лівому верхньому кутку
@@ -110,7 +104,6 @@ public class PlaneCalculationImpl implements PlaneCalculation {
             if (temporaryPoint.getLongitude() < wayPoint.getLongitude()) {
                 // точка в правому верхньому кутку
                 latitudeDifference = temporaryPoint.getFlightSpeed() * Math.abs(Math.cos(temporaryPoint.getCourse()));
-                System.out.println("latitude dif:" + latitudeDifference);
             }
             if (temporaryPoint.getLongitude() > wayPoint.getLongitude()) {
                 // точка в лівому верхньому кутку
@@ -149,7 +142,6 @@ public class PlaneCalculationImpl implements PlaneCalculation {
                                    AirplaneCharacteristics characteristics) {
         double currentAngle = temporaryPoint.getCourse();
         double angleToThePoint = getAngleToThePoint(temporaryPoint, wayPoint);
-        System.out.println("angle " + angleToThePoint);
         if (angleToThePoint < currentAngle) {
             currentAngle -= characteristics.getMaxCourseChange();
         }
@@ -168,7 +160,6 @@ public class PlaneCalculationImpl implements PlaneCalculation {
                 double catetA = wayPoint.getLongitude() - temporaryPoint.getLongitude();
                 double catetB = wayPoint.getLatitude() - temporaryPoint.getLatitude();
                 angleToThePoint = Math.atan2(catetA, catetB);
-                System.out.println("more than");
             }
             if (temporaryPoint.getLongitude() > wayPoint.getLongitude()) {
                 // точка в лівому верхньому кутку
@@ -176,10 +167,6 @@ public class PlaneCalculationImpl implements PlaneCalculation {
                 double catetB = wayPoint.getLongitude() - temporaryPoint.getLongitude();
                 angleToThePoint = Math.atan2(catetA, catetB) + 270;
             }
-            System.out.println(temporaryPoint.getFlightSpeed());
-            System.out.println(temporaryPoint.getCourse());
-            System.out.println("angle " + angleToThePoint);
-            System.out.println(temporaryPoint.getLongitude());
         }
         if (temporaryPoint.getLatitude() > wayPoint.getLatitude()) {
             // нижня частина кординат сітки
