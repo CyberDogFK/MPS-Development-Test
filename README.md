@@ -40,3 +40,17 @@ I use N-tier architecture.
 - Calculating logic of flight... I think I have some mistake in calculating of degree between airplane, and waypoint.
 
 I really hope we can meet and discuss the best way of calculating this logic.
+
+## How to start
+
+I recommend use for starting IDE you like
+1. You need to download repo on your computer
+2. In /src/resources/application.properties you must connect SQL Database,
+add your driver, url to db, and login with password
+3. Go to pom.xml and download all dependencies
+4. If you start this application with IDE, you need to start file in package springboot, 
+file Application Initializer 
+5. Or you can use command line: mvn spring-boot:run
+
+
+
